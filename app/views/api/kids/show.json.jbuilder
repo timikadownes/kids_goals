@@ -1,0 +1,1 @@
+json.partial! @kid, partial: 'kid', as: :kid
