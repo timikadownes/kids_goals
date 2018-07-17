@@ -18,7 +18,7 @@ class Api::KidsController < ApplicationController
       teacher: params[:teacher],
       school: params[:school],
       image: params[:image_url], 
-      user_id: params[:user_id]
+      user_id: current_user.id
       )
     render 'show.json.jbuilder'
   end

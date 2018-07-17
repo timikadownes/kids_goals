@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   
   get "/users/:id" => "users#show"
   post "/login" => "users#create"
-  patch "users/:id" => "users#update"
-  delete "users/:id" => "users#destroy"
+  patch "/users/:id" => "users#update"
+  delete "/users/:id" => "users#destroy"
+
+  # authentication user
   post "/users" => "users#create"
 
   #kid actions
@@ -16,14 +18,14 @@ Rails.application.routes.draw do
   get "/kids/:id" => "kids#show"
   post "/kids" => "kids#create"
   patch "/kids/:id" => "kids#update"
-  delete "kids/:id" => "kids#destroy"
+  delete "/kids/:id" => "kids#destroy"
 
   #goal actions
   get "/goals" => "goals#index"
   get "/goals/:id" => "goals#show"
   post "/goals" => "goals#create"
   patch "/goals/:id" => "goals#update"
-  delete "goals/:id" => "goals#destroy"
+  delete "/goals/:id" => "goals#destroy"
   
   end
   

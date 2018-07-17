@@ -18,9 +18,16 @@ class Api::GoalsController < ApplicationController
       kid_id: params[:kid_id],
       image: params[:image_url],
       date: params[:due_date],
-      description: params[:description],
+      description: params[:description]
       )
-    render 'show.json.jbuilder'
+    if current_user
+      @goal.user_id = current_user.id
+    end
+    if @goal.save
+        render 'show.json.jbuilder'
+    else
+        render json: {errors: @goal.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def update
