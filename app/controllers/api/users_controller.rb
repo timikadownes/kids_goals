@@ -3,8 +3,6 @@ class Api::UsersController < ApplicationController
   def show
   #profile page
   user_id = params[:id]
-  #retireve user data linked to the current id using active record queries to the database.
-
   @user = User.find_by(id: user_id)
 
   render 'show.json.jbuilder'  
@@ -12,7 +10,7 @@ class Api::UsersController < ApplicationController
   end
 
   def create 
-    @user = User.new(
+    @user = User.create(
       name: params[:name],
       email: params[:email],
       password: params[:password],
@@ -26,6 +24,8 @@ class Api::UsersController < ApplicationController
       :unprocessable_entity
     end
   end
+
+
 end
 
 

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Kids Goals App</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="index.css">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+  <!-- <link rel="stylesheet" href="index.css"> -->
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
    <script src="https://unpkg.com/axios/dist/axios.js"></script>
@@ -45,9 +45,6 @@
               </ul>
             </div>
           </nav>
-
-
-    
     <div class="container">
        
      <router-view>
@@ -69,6 +66,7 @@
 <!-- home page paste start -->
 <template id="home-page">
   <div class="vue-component">
+    
     <div>
       Search by name: <input v-model="nameFilter" list="names">
     </div>
@@ -156,7 +154,7 @@
         <label>Password confirmation:</label>
         <input type="password" class="form-control" v-model="passwordConfirmation">
       </div>
-      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+      <button v-on:click="submit()">Submit</button>
     </div>
 
   </div>

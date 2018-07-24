@@ -3,7 +3,7 @@ var HomePage = {
   template: "#home-page",
   data: function() {
     return {
-      message: "Kids and Goals Index!",
+      message: "Kids and Goals Page!",
       kids: [],
       currentKid: {},
       nameFilter: '',
@@ -32,7 +32,7 @@ var HomePage = {
     }
   },
   computed: {
-    sortedProducts: function(){
+    sortedKids: function(){
       return this.kids.sort(function(kid1, kid2){
         var lowerName1 = kid1[this.sortAttribute].toLowerCase();
         var lowerName2 = kid2[this.sortAttribute].toLowerCase();
