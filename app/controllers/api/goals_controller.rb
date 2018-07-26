@@ -32,12 +32,11 @@ class Api::GoalsController < ApplicationController
     goal_id = params[:id]
     @goal = Goal.find(goal_id)
 
-    @goal.name = params(:name)
-    @goal.age = params(:age)
-    @goal.grade = params(:grade)
-    @goal.teacher = params(:teacher)
-    @goal.school = params(:school)
+    @goal.category = params(:category)
     @goal.image_url = params(:image_url)
+    @goal.due_date = params(:due_date)
+    @goal.description = params(:description)
+    @goal.kid_id = params(:kid_id)
     
     @goal.save
     render 'show.json.jbuilder'

@@ -203,7 +203,7 @@ var KidEditPage = {
   created: function (){
     axios.get("/api/kids/" + this.$route.params.id).then(function(response) {
       this.name = response.data.name;
-      this.grade = response.date.grade;
+      this.grade = response.data.grade;
       this.age = response.data.age;
       this.school = response.data.school;
       this.teacher = response.data.teacher;
@@ -223,7 +223,7 @@ var KidEditPage = {
         user_id: this.user_id
       };
       axios
-        .patch("/api/kids" +this.$route.params.id, params)
+        .patch("/api/kids/" +this.$route.params.id, params)
         .then(function(response) {
           router.push("/");
         })
@@ -236,38 +236,49 @@ var KidEditPage = {
   },
 };
 
-var GoalNewPage = {
-  template: "#goal-new-page",
+var GoalEditPage = {
+  template: "#goal-edit-page",
   data: function() {
     return {
       category: "",
-      image_url: "",
       due_date: "",
       description: "",
+      image_url: "",
       errors: []
     };
+  },
+  created: function (){
+    axios.get("/api/goals/" + this.$route.params.id).then(function(response) {
+      this.category = response.data.category;
+      this.due_date = response.data.due_date;
+      this.description = response.data.description;
+      this.image_url = response.data.image_url;
+      this.kid_id = response.data.kid_id;
+    }.bind(this));
   },
   methods: {
     submit: function() {
       var params = {
         category: this.category,
-        image_url: this.image_url,
         due_date: this.due_date,
-        description: this.description
+        description: this.description,
+        image_url: this.image_url,
+        user_id: this.user_id
       };
       axios
-        .post("/api/goals", params)
+        .patch("/api/goals/" +this.$route.params.id, params)
         .then(function(response) {
-          router.push("/users/" +response.data.user_id);
+          router.push("/");
         })
         .catch(
           function(error) {
             this.errors = error.response.data.errors;
-          }.bind(this)
-        );
-    }
-  }
+        }.bind(this)
+      );
+    },
+  },
 };
+
 
 var router = new VueRouter({
   routes: [
@@ -277,9 +288,10 @@ var router = new VueRouter({
     { path: "/logout", component: LogoutPage },
     { path: "/kids/new", component: KidNewPage },
     { path: "/kids/:id/edit", component: KidEditPage },
+    { path: "/goals/:id/edit", component: GoalEditPage },
     { path: "/users/:id/", component: UserShowPage },
     { path: "/kids/:id/", component: KidShowPage },
-    { path: "/goals/new/", component: GoalNewPage },
+    
   ]
 });
 
