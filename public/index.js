@@ -132,7 +132,6 @@ var KidNewPage = {
       school: "",
       teacher: "",
       image_url: "",
-      user_id: "",
       errors: []
     };
   },
@@ -145,12 +144,12 @@ var KidNewPage = {
         school: this.school,
         teacher: this.teacher,
         image_url: this.image_url,
-        user_id: this.user_id
       };
       axios
         .post("/api/kids", params)
         .then(function(response) {
-          router.push("/#/");
+          console.log(response.data)
+          router.push("/users/" +response.data.user_id);
         })
         .catch(
           function(error) {

@@ -17,7 +17,7 @@ class Api::KidsController < ApplicationController
       grade: params[:grade],
       teacher: params[:teacher],
       school: params[:school],
-      image: params[:image_url], 
+      image_url: params[:image_url], 
       user_id: current_user.id
       )
     if @kid.save
