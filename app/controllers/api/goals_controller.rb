@@ -16,13 +16,11 @@ class Api::GoalsController < ApplicationController
     @goal = Goal.new(
       category: params[:category],
       kid_id: params[:kid_id],
-      image: params[:image_url],
-      date: params[:due_date],
+      image_url: params[:image_url],
+      due_date: params[:due_date],
       description: params[:description]
       )
-    if current_user
-      @goal.user_id = current_user.id
-    end
+    
     if @goal.save
         render 'show.json.jbuilder'
     else

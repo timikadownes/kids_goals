@@ -34,6 +34,11 @@ var KidShowPage = {
   data: function() {
     return {
       kid: {},
+      category: "",
+      image_url: "",
+      due_date: "",
+      description: "",
+      errors: []
     };
   },
   created: function() {
@@ -43,7 +48,27 @@ var KidShowPage = {
     }.bind(this));
   },
 
-  methods: {},
+   methods: {
+    submit: function() {
+      var params = {
+        category: this.category,
+        image_url: this.image_url,
+        due_date: this.due_date,
+        description: this.description,
+        kid_id: this.kid.id
+      };
+      axios
+        .post("/api/goals", params)
+        .then(function(response) {
+          router.push("/users/" +response.data.user_id);
+        })
+        .catch(
+          function(error) {
+            this.errors = error.response.data.errors;
+          }.bind(this)
+        );
+    }
+  },
   computed: {}
 };
 
@@ -67,7 +92,7 @@ var SignupPage = {
         password_confirmation: this.passwordConfirmation
       };
       axios
-        .post("/users", params)
+        .post("/api/users", params)
         .then(function(response) {
           router.push("/login");
         })
@@ -211,6 +236,39 @@ var KidEditPage = {
   },
 };
 
+var GoalNewPage = {
+  template: "#goal-new-page",
+  data: function() {
+    return {
+      category: "",
+      image_url: "",
+      due_date: "",
+      description: "",
+      errors: []
+    };
+  },
+  methods: {
+    submit: function() {
+      var params = {
+        category: this.category,
+        image_url: this.image_url,
+        due_date: this.due_date,
+        description: this.description
+      };
+      axios
+        .post("/api/goals", params)
+        .then(function(response) {
+          router.push("/users/" +response.data.user_id);
+        })
+        .catch(
+          function(error) {
+            this.errors = error.response.data.errors;
+          }.bind(this)
+        );
+    }
+  }
+};
+
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
@@ -221,6 +279,7 @@ var router = new VueRouter({
     { path: "/kids/:id/edit", component: KidEditPage },
     { path: "/users/:id/", component: UserShowPage },
     { path: "/kids/:id/", component: KidShowPage },
+    { path: "/goals/new/", component: GoalNewPage },
   ]
 });
 
