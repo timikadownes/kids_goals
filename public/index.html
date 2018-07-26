@@ -28,27 +28,53 @@
 <!-- home page paste start -->
 <template id="home-page">
   <div class="vue-component">
-    <div v-for="kid in kids">
-     <h3><a href=" '/#/kids/' + kid.id">{{ kid.name }}</a></h3>      
-     <p>{{kid.school}}<br>
-     {{kid.grade}}</p>
-     <p>Age: {{ kid.age }}<br></p>
-     <p>Teacher: {{ kid.teacher }}<br></p>
-    </div>
-
-    <a href="/#/kids/new">Add New Kid</a>
+    <h1> {{message}}</h1>
+   <h3>About This App</h3><br>
+   <h2>This is the kids goal app for parents!  Keep your kids activities organized while helping your children learn to reach their full potential</h2>
 
   </div>
 </template>
-
 <!-- home page paste end -->
 
+<template id="user-show-page">
+  <div class="vue-component">
+    <div v-for="kid in user.kids">
+     <h3><a v-bind:href=" '/#/kids/' +kid.id">{{ kid.name }}</a></h3>      
+     <p>School: {{kid.school}}<br>
+     <p>Grade: {{kid.grade}}</p>
+     <p>Age: {{ kid.age }}<br></p>
+     <p>Teacher: {{ kid.teacher }}<br></p>
+     <p>Image: {{ kid.image_url }}<br></p>
+   
+    <h3>Goals for {{ kid.name }}</h3>
+    <div v-for="goal in kid.goals">
+      <p>Category: {{ goal.category }}</p>
+      <p>Due Date:{{ goal.due_date }}</p>
+      <p>Description: {{ goal.description }}</p>
+      <p>Supporting Image/Data: {{ goal.image_url }}</p>
+    </div>
+   </div>
+   <a href="/#/kids/new">Add New Kid</a><br>
+  </div>
+</template>
+
+<template id="kid-show-page">
+  <div class="vue-component">
+    <div>
+     <h3> {{ kid.name }}'s Goals</a></h3> 
+      <div v-for="goal in kid.goals">
+        <p>Category: {{ goal.category }}</p>
+        <p>Due Date:{{ goal.due_date }}</p>
+        <p>Description: {{ goal.description }}</p>
+        <p>Supporting Image/Data: {{ goal.image_url }}</p>
+      </div>
+    </div>
+    <a href="/#/goals/new">Add New Goal</a>
+  </div>
+</template>
 
 
- <div id="vue-app">
-    <a href="/#/signup">Signup</a>
-    <a href="/#/login">Login</a>
-    <a href="/#/logout">Logout</a>
+  <div id="vue-app">
     <router-view></router-view>
   </div>
 
@@ -104,4 +130,49 @@
 
   </div>
 </template>
+
+<template id="kid-new-page">
+  <div class="vue-component">
+
+  
+      <h1>Add New Kid</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div>
+        Name: <input v-model="name"><br>
+        Grade: <input v-model="grade"><br>
+        Age: <input v-model="age"><br>
+        School: <input v-model="school"><br>
+        Teacher: <input v-model="teacher"><br>
+        Image: <input v-model="image_url"><br>
+      <br>
+      <button v-on:click="submit()">Submit</button>
+    </div>
+
+  </div>
+</template>
+
+<template id="kid-edit-page">
+  <div class="vue-component">
+
+  
+      <h1>Edit Kid</h1>
+      <ul>
+        <li class="text-danger" v-for="error in errors">{{ error }}</li>
+      </ul>
+      <div>
+        Name: <input v-model="name"><br>
+        Grade: <input v-model="grade"><br>
+        Age: <input v-model="age"><br>
+        School: <input v-model="school"><br>
+        Teacher: <input v-model="teacher"><br>
+        Image: <input v-model="image_url"><br>
+      <br>
+      <button v-on:click="submit()">Submit</button>
+    </div>
+
+  </div>
+</template>
+
 

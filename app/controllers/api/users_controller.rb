@@ -2,8 +2,8 @@ class Api::UsersController < ApplicationController
 
   def show
   #profile page
-  user_id = params[:id]
-  @user = User.find_by(id: user_id)
+  
+  @user = current_user
 
   render 'show.json.jbuilder'  
 
